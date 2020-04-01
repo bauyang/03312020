@@ -64,7 +64,9 @@ let slideshow ={
     nextphoto: function(){
         
         if (this.currentPhotoIndex == (this.photoList.length-1)){
+            this.pause();
             console.log('End of Slideshow');
+            
         } 
         else {
             this.currentPhotoIndex++;
@@ -82,13 +84,19 @@ let slideshow ={
     },
     getCurrentPhoto: function(){
         return this.photoList[this.currentPhotoIndex];
+    },
+
+    playInterval: null,
+
+    play: function(){
+        playInterval = setInterval(()=>{
+            this.nextphoto();
+        },2000);
+    },
+    pause: function(){
+        clearInterval(playInterval);
     }
  };
 
  console.log(slideshow.getCurrentPhoto());
- slideshow.nextphoto();
- slideshow.nextphoto();
- slideshow.nextphoto();
- slideshow.prevPhoto();
- slideshow.prevPhoto();
- slideshow.prevPhoto();
+ slideshow.play();
